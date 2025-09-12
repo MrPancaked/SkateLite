@@ -1,49 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu;
-    [SerializeField] GameObject settingsPanel;
-    public void Pause()
+    //[Header ("Tricks")]
+    //[SerializeField] List<>
+
+
+    void Start()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0;
+        
     }
 
-    public void Settings()
+    void Update()
     {
-        pauseMenu.SetActive(false);
-        settingsPanel.SetActive(true);
+        
     }
-
-    public void backToPauseMenu()
-    {
-        pauseMenu.SetActive(true);
-        settingsPanel.SetActive(false);
-    }
-
-    public void Resume()
-    {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1;
-    }
-
-    public void ChangeScene(string scene)
-    {
-        SceneManager.LoadScene(scene);
-    }
-
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1;
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
-
-   
 }
