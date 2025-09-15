@@ -42,8 +42,35 @@ public class PlayerController : MonoBehaviour
         if (inputManager.jump && grounded)
         {
             rb.AddForce(transform.up * jumpHight, ForceMode.Impulse);
+            switch (inputManager.trick)
+            {
+                case TrickDirection.Up:
+                {
+                    Debug.Log("UpTrick");
+                    break;
+                }
+                case TrickDirection.Down:
+                {
+                    Debug.Log("DownTrick");
+                    break;
+                }
+                case TrickDirection.Left:
+                {
+                    Debug.Log("LeftTrick");
+                    break;
+                }
+                case TrickDirection.Right:
+                {
+                    Debug.Log("RightTrick");
+                    break;
+                }
+                case TrickDirection.None:
+                {
+                    Debug.Log("Ollie");
+                    break;
+                }
+            }
         }
-        
         inputManager.ResetInputs();
     }
 
