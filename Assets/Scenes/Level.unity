@@ -576,6 +576,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1674286911 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 249159952063379240, guid: 271570d473968604fa67da51769e427e, type: 3}
+  m_PrefabInstance: {fileID: 8984960128771157446}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1930823853
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +702,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1989666850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8096976709007158369, guid: 0216acae70437cf438d7a778cea27744, type: 3}
+  m_PrefabInstance: {fileID: 7816710460554585229}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5319689528189978969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -705,6 +715,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 62597394}
     m_Modifications:
+    - target: {fileID: 2785849474440388344, guid: b1aff94277ac2ad49bbdd5844f2a8956, type: 3}
+      propertyPath: settingsPanel
+      value: 
+      objectReference: {fileID: 1989666850}
     - target: {fileID: 3722894045719489268, guid: b1aff94277ac2ad49bbdd5844f2a8956, type: 3}
       propertyPath: m_Name
       value: Menu Panel
@@ -793,6 +807,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -48
       objectReference: {fileID: 0}
+    - target: {fileID: 4523022224264334509, guid: b1aff94277ac2ad49bbdd5844f2a8956, type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 1674286911}
+    - target: {fileID: 4523022224264334509, guid: b1aff94277ac2ad49bbdd5844f2a8956, type: 3}
+      propertyPath: settingsPanel
+      value: 
+      objectReference: {fileID: 1989666850}
     - target: {fileID: 8980841934040637517, guid: b1aff94277ac2ad49bbdd5844f2a8956, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 30.988
@@ -1014,6 +1036,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 5319689528189978970}
+    - target: {fileID: 8984267255173086673, guid: 271570d473968604fa67da51769e427e, type: 3}
+      propertyPath: settingsPanel
+      value: 
+      objectReference: {fileID: 1989666850}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
