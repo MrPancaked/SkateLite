@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 halfExtends;
     [SerializeField] private Vector3 center;
     [SerializeField] private LayerMask grindLayerMask;
+    
+    //private stuff
+    private bool grounded;
+    private bool onRail;
 
     private void Awake()
     {
@@ -42,26 +46,26 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         inputManager.UpdateInputs();
+        grounded = GroundedCheck();
+        onRail = OnGrindCheck();
     }
 
     private void FixedUpdate()
     {
-        bool grounded = GroundedCheck();
-        bool OnRail = OnGrindCheck();
-        
-        Debug.Log($"Grounded: {grounded}, OnRail: {OnRail}");
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, playerSpeed);
-        if (inputManager.jump && (grounded || OnRail))
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, playerSpeed); //setting horizontal velocity to be constant
+        if (inputManager.jump && (grounded || onRail)) //jumping / trick
         {
             rb.AddForce(transform.up * jumpHight, ForceMode.Impulse);
             DoTrick();
         }
 
-        if (OnRail && inputManager.trick != TrickDirection.None && rb.linearVelocity.y < 0)
+        if (!grounded && inputManager.trick != TrickDirection.None && rb.linearVelocity.y < 0 && !grindHitbox.enabled) //grinding DOESNT TAKE INTO ACCOUNT LANDING ON UPWARDS RAIL
         {
             grindHitbox.enabled = true;
-            DoGrind();
+            Debug.Log($"grindHitbox: {grindHitbox.enabled}");
         }
+        
+        if (onRail && grindHitbox.enabled) DoGrind();
         
         ResetVariables(grounded);
     }
@@ -144,9 +148,10 @@ public class PlayerController : MonoBehaviour
     {
         inputManager.ResetInputs();
 
-        if (inputManager.trick == TrickDirection.None || grounded)
+        if ((inputManager.trick == TrickDirection.None || grounded) && grindHitbox.enabled)
         {
             grindHitbox.enabled = false;
+            Debug.Log($"grindHitbox: {grindHitbox.enabled}");
         }
     }
 
