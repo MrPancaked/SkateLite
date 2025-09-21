@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6fac800b113146458c6684e6ffe8c73, type: 3}
+  m_Name: TrickSettings
+  m_EditorClassIdentifier: 
+  upTrickName: KickFlip
+  downTrickName: HeelFlip
+  leftTrickName: FS180
+  rightTrickName: BS180
+  noneTrickName: Ollie
+  upGrindName: 50-50 Grind
+  downGrindName: FeebleGrind
+  leftGrindName: TailGrind
+  rightGrindName: NoseGrind
+  upTrickScore: 1000
+  downTrickScore: 2000
+  leftTrickScore: 3000
+  rightTrickScore: 4000
+  noneTrickScore: 100
+  upGrindScore: 1234
+  downGrindScore: 2345
+  leftGrindScore: 3456
+  rightGrindScore: 4567
