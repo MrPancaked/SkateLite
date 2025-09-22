@@ -1,8 +1,6 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -18,9 +16,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI multiplierText;
     
     //private stuff
-    private int score = 0;
-    private int combo = 0;
-    private int comboScore = 0;
+    private int score;
     private List<string> tricklist = new List<string>();
     private List<int> comboScoreList = new List<int>();
 

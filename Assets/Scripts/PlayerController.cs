@@ -3,15 +3,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
-
     
     //References
     private Rigidbody rb;
     [SerializeField] private BoxCollider grindHitbox; //necessary for the gizmo to work
     private InputManager inputManager;
-    public ComboPostFX comboPostFX;
-    [SerializeField] private SpriteTrail spriteTrail;
-
+    private ScoreManager scoreManager;
+    
     [Header("Player Settings")]
     [SerializeField] private float playerSpeed;
     [SerializeField] private float jumpHight;
@@ -25,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private bool grounded;
     private bool onRail;
     private bool underRail;
+    private bool mountedRail;
+    private bool tricking; //used to track if player is currently tricking or not so certain processes in ResetVariables() dont occur more than once
 
     #region Unity Methods
     private void Awake()
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         grindHitbox = gameObject.GetComponent<BoxCollider>();
         inputManager = InputManager.Instance;
+        scoreManager = ScoreManager.Instance;
     }
 
     private void Update()
@@ -60,71 +61,13 @@ public class PlayerController : MonoBehaviour
     #endregion
     private void DoTrick()
     {
-        switch (inputManager.trick)
-        {
-            case TrickDirection.Up:
-            {
-                Debug.Log("UpTrick");
-                spriteTrail.StartTrail();
-                break;
-            }
-            case TrickDirection.Down:
-            {
-                Debug.Log("DownTrick");
-                spriteTrail.StartTrail();
-                break;
-            }
-            case TrickDirection.Left:
-            {
-                Debug.Log("LeftTrick");
-                spriteTrail.StartTrail();
-                comboPostFX.SetComboLevel(10);
-                break;
-            }
-            case TrickDirection.Right:
-            {
-                Debug.Log("RightTrick");
-                break;
-            }
-            case TrickDirection.None:
-            {
-                Debug.Log("Ollie");
-                spriteTrail.StopTrail();
-                break;
-            }
-        }
+        tricking = true;
+        scoreManager.AddTrickToCombo();
     }
     private void DoGrind()
     {
-        switch (inputManager.trick)
-        {
-            case TrickDirection.Up:
-            {
-                Debug.Log("UpGrind");
-                break;
-            }
-            case TrickDirection.Down:
-            {
-                Debug.Log("DownGrind");
-                break;
-            }
-            case TrickDirection.Left:
-            {
-                Debug.Log("LeftGrind");
-                break;
-            }
-            case TrickDirection.Right:
-            {
-                Debug.Log("RightGrind");
-                break;
-            }
-            case TrickDirection.None:
-            {
-                Debug.Log("No Grind");
-                comboPostFX.SetComboLevel(10);
-                break;
-            }
-        }
+        tricking = true;
+        scoreManager.AddGrindToCombo();
     }
 
     private void ProcessJumps()
@@ -146,7 +89,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!grounded && inputManager.trick != TrickDirection.None &&  underRail) grindHitbox.enabled = false;
         
-        if (onRail && grindHitbox.enabled && rb.linearVelocity.y <= 1) DoGrind(); // THIS IS ALSO TRIGGERED WHEN PASSING THE RAIL FROM BELOW. Ez fix is checking if rb.y speed is 0 or lower so skims get skipped
+        if (mountedRail && grindHitbox.enabled && rb.linearVelocity.y <= 1) DoGrind();
     }
 
     private void PhysicsChecks()
@@ -155,14 +98,22 @@ public class PlayerController : MonoBehaviour
         grounded = Physics.Raycast(transform.position, -transform.up, transform.localScale.y + 0.1f, groundLayerMask);
         
         Vector3 hitBoxSize = new Vector3(grindHitbox.size.x, hitBoxHeight, grindHitbox.size.z);
-        onRail = Physics.CheckBox(transform.position + grindHitbox.center - 0.5f * (grindHitbox.size.y + hitBoxHeight) * transform.up, 0.5f * hitBoxSize, Quaternion.identity, grindLayerMask);
+        bool railCheck = Physics.CheckBox(transform.position + grindHitbox.center - 0.5f * (grindHitbox.size.y + hitBoxHeight) * transform.up, 0.5f * hitBoxSize, Quaternion.identity, grindLayerMask);
+        if (!onRail && railCheck) mountedRail = true;
+        else mountedRail = false;
+        onRail = railCheck;
         underRail = Physics.CheckBox(transform.position + grindHitbox.center + (0.5f * (hitBoxHeight + 0.2f) * transform.up), 0.5f * new Vector3(hitBoxSize.x, grindHitbox.size.y + hitBoxHeight, hitBoxSize.z), Quaternion.identity, grindLayerMask);
     }
 
     private void ResetVariables(bool grounded)
     {
         inputManager.ResetInputs();
-
+        if (grounded && rb.linearVelocity.y < 0f && tricking)
+        {
+            tricking = false;
+            scoreManager.CalculateNewScore();
+            scoreManager.StopCombo();
+        }
         if ((inputManager.trick == TrickDirection.None || grounded) && grindHitbox.enabled)
         {
             grindHitbox.enabled = false;
