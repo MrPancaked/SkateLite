@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController1 : MonoBehaviour
 {
-    public static PlayerController Instance;
+    public static PlayerController1 Instance;
     
     //References
     private Rigidbody rb;
