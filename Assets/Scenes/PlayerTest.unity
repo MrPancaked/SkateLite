@@ -1719,7 +1719,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1869710306}
-  - {fileID: 695977639}
+  - {fileID: 719241771}
   - {fileID: 615837791}
   - {fileID: 603688402}
   - {fileID: 849547243}
@@ -1728,7 +1728,7 @@ Transform:
   - {fileID: 396414259}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &695977638
+--- !u!1 &719241770
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1736,10 +1736,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 695977639}
-  - component: {fileID: 695977642}
-  - component: {fileID: 695977641}
-  - component: {fileID: 695977640}
+  - component: {fileID: 719241771}
+  - component: {fileID: 719241774}
+  - component: {fileID: 719241773}
+  - component: {fileID: 719241772}
   m_Layer: 6
   m_Name: pipe (2)
   m_TagString: Untagged
@@ -1747,28 +1747,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &695977639
+--- !u!4 &719241771
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695977638}
+  m_GameObject: {fileID: 719241770}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -39, y: -135, z: -555}
+  m_LocalPosition: {x: 5, y: -140, z: -555}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 621507265}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &695977640
+--- !u!65 &719241772
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695977638}
+  m_GameObject: {fileID: 719241770}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1783,13 +1783,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 561.28613, y: 50, z: 50}
   m_Center: {x: -112.61441, y: 243.9, z: 293.79}
---- !u!23 &695977641
+--- !u!23 &719241773
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695977638}
+  m_GameObject: {fileID: 719241770}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1828,13 +1828,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &695977642
+--- !u!33 &719241774
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695977638}
+  m_GameObject: {fileID: 719241770}
   m_Mesh: {fileID: 6381356175885465824, guid: 11c6b96679ec0b6479cb79497732f644, type: 3}
 --- !u!1 &849547242
 GameObject:
@@ -2059,7 +2059,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trickSettings: {fileID: 11400000, guid: 1e970fb2350b4334d9acee5397856852, type: 2}
+  scaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.004831925
+      value: 0.995223
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.035915785
+      value: 0.5187108
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.09695618
+      value: 0.6906238
+      inSlope: 2.71082
+      outSlope: 2.71082
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.17083724
+      value: 0.8831031
+      inSlope: 1.4210116
+      outSlope: 1.4210116
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.32001752
+      value: 0.99557817
+      inSlope: 0.0104861865
+      outSlope: 0.0104861865
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.35534447
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   scoreText: {fileID: 998953269}
+  comboTextRect: {fileID: 1416292651}
   trickText: {fileID: 318265182}
   comboScoreText: {fileID: 1762318905}
   multiplierText: {fileID: 1483144490}

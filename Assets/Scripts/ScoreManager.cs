@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
@@ -8,9 +9,11 @@ public class ScoreManager : MonoBehaviour
     // references
     private InputManager inputManager;
     [SerializeField] private TrickSettings trickSettings;
+    [SerializeField] private AnimationCurve scaleCurve;
     
     [Header("UI Reference")]
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private RectTransform comboTextRect;
     [SerializeField] private TextMeshProUGUI trickText;
     [SerializeField] private TextMeshProUGUI comboScoreText;
     [SerializeField] private TextMeshProUGUI multiplierText;
@@ -147,6 +150,7 @@ public class ScoreManager : MonoBehaviour
     }
     public void UpdateComboUI()
     {
+        StartCoroutine("AnimateText");
         if (tricklist.Count > 0)
         {
             multiplierText.text = $"x{tricklist.Count}";
@@ -175,6 +179,19 @@ public class ScoreManager : MonoBehaviour
         }
         
     }
+
+    private IEnumerator AnimateText()
+    {
+        float time = 0;
+        while (time < 1f)
+        {
+            comboTextRect.localScale = scaleCurve.Evaluate(time) * Vector3.one;
+            time += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        
+    }
+    
     public int GetScore()
     {
         return score;
