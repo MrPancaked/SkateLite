@@ -3,12 +3,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
+
     
     //References
     private Rigidbody rb;
     [SerializeField] private BoxCollider grindHitbox; //necessary for the gizmo to work
     private InputManager inputManager;
-    
+    public ComboPostFX comboPostFX;
+    [SerializeField] private SpriteTrail spriteTrail;
+
     [Header("Player Settings")]
     [SerializeField] private float playerSpeed;
     [SerializeField] private float jumpHight;
@@ -62,16 +65,20 @@ public class PlayerController : MonoBehaviour
             case TrickDirection.Up:
             {
                 Debug.Log("UpTrick");
+                spriteTrail.StartTrail();
                 break;
             }
             case TrickDirection.Down:
             {
                 Debug.Log("DownTrick");
+                spriteTrail.StartTrail();
                 break;
             }
             case TrickDirection.Left:
             {
                 Debug.Log("LeftTrick");
+                spriteTrail.StartTrail();
+                comboPostFX.SetComboLevel(10);
                 break;
             }
             case TrickDirection.Right:
@@ -82,6 +89,7 @@ public class PlayerController : MonoBehaviour
             case TrickDirection.None:
             {
                 Debug.Log("Ollie");
+                spriteTrail.StopTrail();
                 break;
             }
         }
@@ -113,6 +121,7 @@ public class PlayerController : MonoBehaviour
             case TrickDirection.None:
             {
                 Debug.Log("No Grind");
+                comboPostFX.SetComboLevel(10);
                 break;
             }
         }

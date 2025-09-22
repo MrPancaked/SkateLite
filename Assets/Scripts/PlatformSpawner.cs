@@ -10,7 +10,7 @@ public class PlatformSpawner : MonoBehaviour
     public List<GameObject> buildingsPrefabs;
     private List<GameObject> positionedBuilds;
     public Transform buildingSpawningPoint;
-    public Player player;
+    //public PlayerController player;
     public float playerDistance;
 
     void Start()
@@ -31,7 +31,7 @@ public class PlatformSpawner : MonoBehaviour
                                                         1,
                                                         0,
                                                         0
-                                                        ) * player.speed * Time.deltaTime);
+                                                        )); //* player.speed * Time.deltaTime);
         //Moves the building spawner at the speed of the player
     }
 
@@ -61,7 +61,7 @@ public class PlatformSpawner : MonoBehaviour
         //it will spawn as many building prefabs as the number of the level.
         {
             Destroy(positionedBuilds[0]);
-            yield return new WaitForSeconds(2 * playerDistance / player.speed);
+            yield return new WaitForSeconds(2 * playerDistance);// / player.speed);
         }
     }
 
