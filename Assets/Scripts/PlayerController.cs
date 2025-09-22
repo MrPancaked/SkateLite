@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider grindHitbox; //necessary for the gizmo to work
     private InputManager inputManager;
     private ScoreManager scoreManager;
+    [SerializeField] private VFXsManager vfxsManager;
     
     [Header("Player Settings")]
     [SerializeField] private float playerSpeed;
@@ -78,6 +79,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpHight, ForceMode.Impulse);
             DoTrick();
+            vfxsManager.CameraShake(true);
         }
     }
     private void ProcessGrinds()

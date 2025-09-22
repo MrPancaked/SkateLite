@@ -9,7 +9,7 @@ public class SpriteTrail : MonoBehaviour
     [SerializeField] private Color streakColor = Color.cyan;
 
     private List<SpriteRenderer> playerSprites = new List<SpriteRenderer>();
-    private bool active;
+    public static bool active;
 
     void Awake()
     {
@@ -18,7 +18,7 @@ public class SpriteTrail : MonoBehaviour
 
     public void StartTrail()
     {
-        if (!active)
+        if (active)
             StartCoroutine(SpawnTrail());
     }
 
