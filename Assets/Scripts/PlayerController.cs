@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpHight, ForceMode.Impulse);
             DoTrick();
+            vfxsManager.liniarTrails.SetActive(false);
             vfxsManager.EchoEffect(true);
             
         }
@@ -117,14 +118,23 @@ public class PlayerController : MonoBehaviour
             tricking = false;
             scoreManager.CalculateNewScore();
             scoreManager.StopCombo();
-            vfxsManager.Shake();
-            vfxsManager.EchoEffect(false);
+            
         }
         if ((inputManager.trick == TrickDirection.None || grounded) && grindHitbox.enabled)
         {
             grindHitbox.enabled = false;
             Debug.Log($"grindHitbox: {grindHitbox.enabled}");
+            
+
         }
+    }
+
+    private void HitGroundVFX()
+    {
+        vfxsManager.Shake();
+        vfxsManager.DustPuff(true);
+        vfxsManager.EchoEffect(false);
+        vfxsManager.liniarTrails.SetActive(true);
     }
 
     private void OnDrawGizmos()

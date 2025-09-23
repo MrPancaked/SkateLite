@@ -9,7 +9,7 @@ public class SpriteTrail : MonoBehaviour
     [SerializeField] private Color streakColor = Color.cyan;
 
     private List<SpriteRenderer> playerSprites = new List<SpriteRenderer>();
-    public static bool active;
+    public bool active;
 
     void Awake()
     {
