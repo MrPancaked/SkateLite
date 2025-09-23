@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider grindHitbox; //necessary for the gizmo to work
     private InputManager inputManager;
     private ScoreManager scoreManager;
+    private VFXsManager vfxsManager;
     
     [Header("Player Settings")]
     [SerializeField] private float playerSpeed;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
         grindHitbox = gameObject.GetComponent<BoxCollider>();
         inputManager = InputManager.Instance;
         scoreManager = ScoreManager.Instance;
+        vfxsManager = VFXsManager.instance;
     }
 
     private void Update()
@@ -78,7 +80,8 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpHight, ForceMode.Impulse);
             DoTrick();
-            //VFXsManager.instance.CameraShake(true);
+            vfxsManager.EchoEffect(true);
+            
         }
     }
     private void ProcessGrinds()
@@ -114,6 +117,8 @@ public class PlayerController : MonoBehaviour
             tricking = false;
             scoreManager.CalculateNewScore();
             scoreManager.StopCombo();
+            vfxsManager.Shake();
+            vfxsManager.EchoEffect(false);
         }
         if ((inputManager.trick == TrickDirection.None || grounded) && grindHitbox.enabled)
         {

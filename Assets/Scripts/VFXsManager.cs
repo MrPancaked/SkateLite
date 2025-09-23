@@ -12,8 +12,6 @@ public class VFXsManager : MonoBehaviour
 
     public GameObject liniarTrails;
 
-    [SerializeField] private float globalShakeForce = 1f;
-
     private void Awake()
     {
         if (instance == null)
@@ -21,12 +19,6 @@ public class VFXsManager : MonoBehaviour
         else
             Destroy(gameObject);
     }
-
-    public void CameraShake(CinemachineImpulseSource impulseSource)
-    {
-        impulseSource.GenerateImpulseWithForce(globalShakeForce);
-    }
-
 
     public void EchoEffect(bool start)
     {
