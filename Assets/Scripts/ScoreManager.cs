@@ -14,9 +14,9 @@ public class ScoreManager : MonoBehaviour
     [Header("UI Reference")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private RectTransform comboTextRect;
-    [SerializeField] private TextMeshProUGUI trickText;
-    [SerializeField] private TextMeshProUGUI comboScoreText;
-    [SerializeField] private TextMeshProUGUI multiplierText;
+    [SerializeField] private TextMeshPro trickText;
+    [SerializeField] private TextMeshPro comboScoreText;
+    [SerializeField] private TextMeshPro multiplierText;
     
     //private stuff
     private int score;
@@ -37,9 +37,9 @@ public class ScoreManager : MonoBehaviour
         inputManager = InputManager.Instance;
         
         if (scoreText == null) scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<TextMeshProUGUI>();
-        if (trickText == null) trickText = GameObject.FindGameObjectWithTag("TrickText").GetComponent<TextMeshProUGUI>();
-        if (comboScoreText == null) comboScoreText = GameObject.FindGameObjectWithTag("ComboScoreText").GetComponent<TextMeshProUGUI>();
-        if (multiplierText == null) multiplierText = GameObject.FindGameObjectWithTag("MultiplierText").GetComponent<TextMeshProUGUI>();
+        if (trickText == null) trickText = GameObject.FindGameObjectWithTag("TrickText").GetComponent<TextMeshPro>();
+        if (comboScoreText == null) comboScoreText = GameObject.FindGameObjectWithTag("ComboScoreText").GetComponent<TextMeshPro>();
+        if (multiplierText == null) multiplierText = GameObject.FindGameObjectWithTag("MultiplierText").GetComponent<TextMeshPro>();
         UpdateScore();
         UpdateComboUI();
     }
