@@ -1,14 +1,33 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Cinemachine;
 
-[CreateAssetMenu(fileName = "VFXsManager", menuName = "Scriptable Objects/VFXsManager")]
-public class VFXsManager : ScriptableObject
+
+public class VFXsManager : MonoBehaviour
 {
+    public static VFXsManager instance;
+    
     public GameObject liniarTrails;
 
-    public void CameraShake(bool start)
+    [SerializeField] private float globalShakeForce = 1f;
+
+    private void Awake()
+    {
+        if (instance ==null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+
+    public void CameraShake(CinemachineImpulseSource impulseSource)
+    {
+        impulseSource.GenerateImpulseWithForce(globalShakeForce);
+    }
+    /*public void CameraShake(bool start)
     {
         ShakeItToTheMax.start = start;
-    }
+    }*/
 
 
     public void EchoEffect(bool start)

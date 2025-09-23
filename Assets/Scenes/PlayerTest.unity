@@ -4045,7 +4045,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grindHitbox: {fileID: 1572820901}
-  vfxsManager: {fileID: 11400000, guid: 500c282c428cf8048b46c43ce7205253, type: 2}
   playerSpeed: 5
   jumpHight: 7.5
   coyoteTime: 0
@@ -4613,10 +4612,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924665402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14f511ddf775afd499d515cb07d1cf31, type: 3}
+  m_Script: {fileID: 11500000, guid: 02d247f849329a541b9924852f3c21fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   liniarTrails: {fileID: 320644992}
+  globalShakeForce: 1
 --- !u!1 &1976983617
 GameObject:
   m_ObjectHideFlags: 0
