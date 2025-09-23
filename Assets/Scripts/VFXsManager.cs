@@ -7,14 +7,16 @@ using Unity.Cinemachine;
 public class VFXsManager : MonoBehaviour
 {
     public static VFXsManager instance;
-    
+
+    public CinemachineImpulseSource source;
+
     public GameObject liniarTrails;
 
     [SerializeField] private float globalShakeForce = 1f;
 
     private void Awake()
     {
-        if (instance ==null)
+        if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
@@ -24,10 +26,6 @@ public class VFXsManager : MonoBehaviour
     {
         impulseSource.GenerateImpulseWithForce(globalShakeForce);
     }
-    /*public void CameraShake(bool start)
-    {
-        ShakeItToTheMax.start = start;
-    }*/
 
 
     public void EchoEffect(bool start)
@@ -38,5 +36,10 @@ public class VFXsManager : MonoBehaviour
     public void LiniarTrails(bool start)
     {
         liniarTrails.SetActive(start);
+    }
+
+    public void Shake()
+    {
+        source.GenerateImpulse();
     }
 }

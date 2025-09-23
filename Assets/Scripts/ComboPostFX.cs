@@ -17,6 +17,7 @@ public class ComboPostFX : MonoBehaviour
 
         if (globalVolume.profile.TryGet(out LensDistortion ld))
             lensDistortion = ld;
+        
     }
 
     void Update()
