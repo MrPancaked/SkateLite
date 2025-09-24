@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     
     //private stuff
     private bool grounded;
+    private bool platform;
     private bool onRail;
     private bool underRail;
     private bool mountedRail;
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, playerSpeed); //setting horizontal velocity to be constant
         
-        if (inputManager.jump && (grounded || onRail)) //jumping / trick
+        if (inputManager.jump && (grounded || platform || onRail)) //jumping / trick
         {
             rb.AddForce(transform.up * jumpHight, ForceMode.Impulse);
             DoTrick();
@@ -83,12 +84,12 @@ public class PlayerController : MonoBehaviour
     }
     private void ProcessGrinds()
     {
-        if (!grounded && onRail && inputManager.trick != TrickDirection.None && !grindHitbox.enabled) //grinding
+        if (!grounded && !platform && onRail && inputManager.trick != TrickDirection.None && !grindHitbox.enabled) //grinding
         {
             grindHitbox.enabled = true;
             Debug.Log($"grindHitbox: {grindHitbox.enabled}");
         }
-        if (!grounded && inputManager.trick != TrickDirection.None &&  underRail) grindHitbox.enabled = false;
+        if (!grounded && !platform && inputManager.trick != TrickDirection.None &&  underRail) grindHitbox.enabled = false;
         
         if (mountedRail && grindHitbox.enabled && rb.linearVelocity.y <= 1) DoGrind();
     }
@@ -96,7 +97,9 @@ public class PlayerController : MonoBehaviour
     private void PhysicsChecks()
     {
         LayerMask groundLayerMask = LayerMask.GetMask("Ground");
+        LayerMask platformLayerMask = LayerMask.GetMask("Platforms");
         grounded = Physics.Raycast(transform.position, -transform.up, transform.localScale.y + 0.1f, groundLayerMask);
+        platform = Physics.Raycast(transform.position, -transform.up, transform.localScale.y + 0.1f, platformLayerMask);
         
         Vector3 hitBoxSize = new Vector3(grindHitbox.size.x, hitBoxHeight, grindHitbox.size.z);
         bool railCheck = Physics.CheckBox(transform.position + grindHitbox.center - 0.5f * (grindHitbox.size.y + hitBoxHeight) * transform.up, 0.5f * hitBoxSize, Quaternion.identity, grindLayerMask);
