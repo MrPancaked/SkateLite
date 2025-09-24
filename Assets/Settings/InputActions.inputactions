@@ -152,6 +152,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UIActions",
+            "id": "27c7e383-de77-47b1-a8c9-d60c90afb7be",
+            "actions": [
+                {
+                    "name": "Tab",
+                    "type": "Button",
+                    "id": "93e30a14-bd3a-4f42-a1fb-9e559033bd9a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8b49dd54-e593-45fe-95a5-415b0de58ec6",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

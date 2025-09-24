@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private InputManager inputManager;
     private ScoreManager scoreManager;
     private VFXsManager vfxsManager;
+    private SpriteManager spriteManager;
     [SerializeField] private SpriteTrail spriteTrail;
     [SerializeField] private GameObject liniarTrails;
     [SerializeField] private ParticleSystem sparks;
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
         inputManager = InputManager.Instance;
         scoreManager = ScoreManager.Instance;
         vfxsManager = VFXsManager.instance;
+        spriteManager = SpriteManager.Instance;
     }
 
     private void Update()
@@ -73,9 +75,8 @@ public class PlayerController : MonoBehaviour
         tricking = true;
         IsInAirTrails(true);
         vfxsManager.DustPuff(true);
-        
         scoreManager.AddTrickToCombo();
-
+        spriteManager.UpdateTrickSprite();
     }
     private void DoGrind()
     {
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour
         vfxsManager.DustPuff(true);
         sparks.Play();
         scoreManager.AddGrindToCombo();
+        spriteManager.UpdateGrindSprite();
     }
 
     private void ProcessJumps()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,26 @@ public class UImanager : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject settingsPanel;
+    [SerializeField] private GameObject tabUI;
+    private InputManager inputManager;
+
+    private void Start()
+    {
+        inputManager = InputManager.Instance;
+    }
+
+    private void Update()
+    {
+        if (inputManager.tabPressed)
+        {
+            if (!tabUI.activeSelf) tabUI.SetActive(true);
+        }
+        else
+        {
+            if (tabUI.activeSelf) tabUI.SetActive(false);
+        }
+    }
+
     public void Pause()
     {
         pauseMenu.SetActive(true);

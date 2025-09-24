@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,7 +19,9 @@ public class InputManager : MonoBehaviour
     private InputAction downTrickInputAction;
     private InputAction leftTrickInputAction;
     private InputAction rightTrickInputAction;
-    
+    private InputAction tabInputAction;
+
+    public bool tabPressed;
     public bool jump;
     
     
@@ -36,8 +39,9 @@ public class InputManager : MonoBehaviour
         downTrickInputAction = controls.FindActionMap("PlayerActions").FindAction("DownTrick");
         leftTrickInputAction = controls.FindActionMap("PlayerActions").FindAction("LeftTrick");
         rightTrickInputAction = controls.FindActionMap("PlayerActions").FindAction("RightTrick");
+        tabInputAction = controls.FindActionMap("UIActions").FindAction("Tab");
     }
-
+    
     private void OnEnable()
     {
         jumpInputAction.Enable();
@@ -45,6 +49,7 @@ public class InputManager : MonoBehaviour
         downTrickInputAction.Enable();
         leftTrickInputAction.Enable();
         rightTrickInputAction.Enable();
+        tabInputAction.Enable();
     }
 
     private void OnDisable()
@@ -54,10 +59,18 @@ public class InputManager : MonoBehaviour
         downTrickInputAction.Disable();
         leftTrickInputAction.Disable();
         rightTrickInputAction.Disable();
+        tabInputAction.Disable();
     }
+
+    private void Update()
+    {
+        if (tabInputAction.IsPressed()) tabPressed = true;
+        else tabPressed = false;
+    }
+
     #endregion
     
-    public void UpdateInputs()
+    public void UpdateInputs() //most if not all of these can just be called in update since this method is called in the playercontroller update
     {
         if (jumpInputAction.triggered) jump = true; //maybe change jumpInputAction.triggered to jumpInputAction. to allow bhop?
         if (upTrickInputAction.IsPressed()) trick = TrickDirection.Up;
