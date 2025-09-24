@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         ProcessJumps();
         ProcessGrinds();
         
-        ResetVariables(grounded);
+        ResetVariables(grounded, platform);
     }
     #endregion
     private void DoTrick()
@@ -109,10 +109,10 @@ public class PlayerController : MonoBehaviour
         underRail = Physics.CheckBox(transform.position + grindHitbox.center + (0.5f * (hitBoxHeight + 0.2f) * transform.up), 0.5f * new Vector3(hitBoxSize.x, grindHitbox.size.y + hitBoxHeight, hitBoxSize.z), Quaternion.identity, grindLayerMask);
     }
 
-    private void ResetVariables(bool grounded)
+    private void ResetVariables(bool grounded, bool platform)
     {
         inputManager.ResetInputs();
-        if (grounded && rb.linearVelocity.y < 0f && tricking)
+        if ((grounded || platform) && rb.linearVelocity.y < 0f && tricking)
         {
             tricking = false;
             scoreManager.CalculateNewScore();
