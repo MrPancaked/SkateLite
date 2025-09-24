@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private VFXsManager vfxsManager;
     [SerializeField] private SpriteTrail spriteTrail;
     [SerializeField] private GameObject liniarTrails;
+    [SerializeField] private ParticleSystem sparks;
 
 
     [Header("Player Settings")]
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private bool onRail;
     private bool underRail;
     private bool mountedRail;
+    private bool deMountRail;
     private bool tricking; //used to track if player is currently tricking or not so certain processes in ResetVariables() dont occur more than once
 
     #region Unity Methods
@@ -70,6 +72,7 @@ public class PlayerController : MonoBehaviour
     {
         tricking = true;
         IsInAirTrails(true);
+        vfxsManager.DustPuff(true);
         
         scoreManager.AddTrickToCombo();
 
@@ -78,6 +81,8 @@ public class PlayerController : MonoBehaviour
     {
         tricking = true;
         IsInAirTrails(true);
+        vfxsManager.DustPuff(true);
+        sparks.Play();
         scoreManager.AddGrindToCombo();
     }
 
@@ -89,10 +94,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpHight, ForceMode.Impulse);
             DoTrick();
-            
-            
-            
-            
         }
     }
     private void ProcessGrinds()
@@ -123,8 +124,13 @@ public class PlayerController : MonoBehaviour
         
         Vector3 hitBoxSize = new Vector3(grindHitbox.size.x, hitBoxHeight, grindHitbox.size.z);
         bool railCheck = Physics.CheckBox(transform.position + grindHitbox.center - 0.5f * (grindHitbox.size.y + hitBoxHeight) * transform.up, 0.5f * hitBoxSize, Quaternion.identity, grindLayerMask);
+        
         if (!onRail && railCheck) mountedRail = true;
         else mountedRail = false;
+
+        if (onRail && !railCheck) deMountRail = true;
+        else deMountRail = false;
+        
         onRail = railCheck;
         underRail = Physics.CheckBox(transform.position + grindHitbox.center + (0.5f * (hitBoxHeight + 0.2f) * transform.up), 0.5f * new Vector3(hitBoxSize.x, grindHitbox.size.y + hitBoxHeight, hitBoxSize.z), Quaternion.identity, grindLayerMask);
     }
@@ -143,9 +149,9 @@ public class PlayerController : MonoBehaviour
         {
             grindHitbox.enabled = false;
             Debug.Log($"grindHitbox: {grindHitbox.enabled}");
-            
-
         }
+        
+        if (deMountRail) sparks.Stop();
     }
 
     private void HitGroundVFX()
@@ -161,14 +167,14 @@ public class PlayerController : MonoBehaviour
 
         if (inAir)
         {
-            spriteTrail.StopTrail();
+            //spriteTrail.StopTrail();
             liniarTrails.SetActive(true);
             vfxsManager.ComboPostFX(1);
         }
         else
         {
-            liniarTrails.SetActive(false) ;
-            spriteTrail.StartTrail();
+            liniarTrails.SetActive(false);
+            //spriteTrail.StartTrail();
             vfxsManager.ComboPostFX(0);
         }
     }
