@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerController : MonoBehaviour
 {
@@ -69,7 +70,9 @@ public class PlayerController : MonoBehaviour
     {
         tricking = true;
         IsInAirTrails(true);
+        
         scoreManager.AddTrickToCombo();
+
     }
     private void DoGrind()
     {
@@ -110,6 +113,13 @@ public class PlayerController : MonoBehaviour
         LayerMask platformLayerMask = LayerMask.GetMask("Platforms");
         grounded = Physics.Raycast(transform.position, -transform.up, transform.localScale.y + 0.1f, groundLayerMask);
         platform = Physics.Raycast(transform.position, -transform.up, transform.localScale.y + 0.1f, platformLayerMask);
+
+        if (platform)
+        {
+            HitGroundVFX();
+            IsInAirTrails(false);
+        } else if (grounded) IsInAirTrails(false);
+
         
         Vector3 hitBoxSize = new Vector3(grindHitbox.size.x, hitBoxHeight, grindHitbox.size.z);
         bool railCheck = Physics.CheckBox(transform.position + grindHitbox.center - 0.5f * (grindHitbox.size.y + hitBoxHeight) * transform.up, 0.5f * hitBoxSize, Quaternion.identity, grindLayerMask);
@@ -142,8 +152,6 @@ public class PlayerController : MonoBehaviour
     {
         vfxsManager.Shake();
         vfxsManager.DustPuff(true);
-        spriteTrail.StartTrail();
-        liniarTrails.SetActive(false);
     }
 
     private void IsInAirTrails(bool inAir)
@@ -155,11 +163,13 @@ public class PlayerController : MonoBehaviour
         {
             spriteTrail.StopTrail();
             liniarTrails.SetActive(true);
+            vfxsManager.ComboPostFX(1);
         }
         else
         {
             liniarTrails.SetActive(false) ;
             spriteTrail.StartTrail();
+            vfxsManager.ComboPostFX(0);
         }
     }
 

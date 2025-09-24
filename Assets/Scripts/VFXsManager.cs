@@ -14,12 +14,19 @@ public class VFXsManager : MonoBehaviour
 
     public GameObject dustPuff;
 
+    public ComboPostFX comboPostFX;
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
+    }
+
+    public void ComboPostFX(int level)
+    {
+        comboPostFX.SetComboLevel(level);
     }
 
     private void Start()

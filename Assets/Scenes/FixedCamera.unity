@@ -376,14 +376,23 @@ PrefabInstance:
       value: VFX Manager (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8402536914976301355, guid: 9e9d8a40b08106a458df3f3c8d266cce, type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 641506910}
+    - target: {fileID: 8402536914976301355, guid: 9e9d8a40b08106a458df3f3c8d266cce, type: 3}
       propertyPath: dustPuff
       value: 
       objectReference: {fileID: 1558689603}
     - target: {fileID: 8402536914976301355, guid: 9e9d8a40b08106a458df3f3c8d266cce, type: 3}
+      propertyPath: comboPostFX
+      value: 
+      objectReference: {fileID: 641506909}
+    - target: {fileID: 8402536914976301355, guid: 9e9d8a40b08106a458df3f3c8d266cce, type: 3}
       propertyPath: liniarTrails
       value: 
       objectReference: {fileID: 320644992}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8465557683363836418, guid: 9e9d8a40b08106a458df3f3c8d266cce, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1785,6 +1794,28 @@ Transform:
   - {fileID: 396414259}
   m_Father: {fileID: 1810035121}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &641506909 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 305182096315405282, guid: 9e9d8a40b08106a458df3f3c8d266cce, type: 3}
+  m_PrefabInstance: {fileID: 149844324}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35abd35a4317f924e9d2638995a39b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &641506910 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3244121739912443872, guid: 9e9d8a40b08106a458df3f3c8d266cce, type: 3}
+  m_PrefabInstance: {fileID: 149844324}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &695323572
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,6 +3035,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 149844325}
+  - {fileID: 1033095972}
+  - {fileID: 1973124818}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1558689603 stripped
@@ -3170,7 +3203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grindHitbox: {fileID: 1572820901}
   spriteTrail: {fileID: 1572820902}
-  liniarTrails: {fileID: 0}
+  liniarTrails: {fileID: 320644992}
   playerSpeed: 5
   jumpHight: 7.5
   coyoteTime: 0
@@ -3227,8 +3260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   streakPrefab: {fileID: 4671389599274929837, guid: 61a4021fef689a74fa0b98b131c90507, type: 3}
-  spawnInterval: 0.08
-  streakColor: {r: 0.8441649, g: 0.7012578, b: 1, a: 1}
+  spawnInterval: 0.1
+  streakColor: {r: 0.5931144, g: 0.47031355, b: 0.72955966, a: 0.8352941}
 --- !u!1 &1620599672
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,8 +3620,6 @@ Transform:
   - {fileID: 621507265}
   - {fileID: 812280847}
   - {fileID: 1620599676}
-  - {fileID: 1033095972}
-  - {fileID: 1973124818}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1869710305
@@ -4111,7 +4142,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1810035121}
+    m_TransformParent: {fileID: 1539168392}
     m_Modifications:
     - target: {fileID: 6654674840237878507, guid: 33367f85e0a0c2e41a555315d6a89d03, type: 3}
       propertyPath: Target.TrackingTarget
@@ -4229,7 +4260,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1810035121}
+    m_TransformParent: {fileID: 1539168392}
     m_Modifications:
     - target: {fileID: 2476522436540076213, guid: aca7fff897c29994ba0b088f759079af, type: 3}
       propertyPath: m_Name

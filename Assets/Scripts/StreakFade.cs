@@ -2,21 +2,26 @@ using UnityEngine;
 
 public class StreakFade : MonoBehaviour
 {
-    [SerializeField] private float fadeSpeed = 3f;
-    private SpriteRenderer sr;
+    [SerializeField] private float fadeSpeed = 3f; // higher = faster fade
+    private SpriteRenderer[] renderers;
 
     void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
+        renderers = GetComponentsInChildren<SpriteRenderer>();
     }
 
     void Update()
     {
-        Color c = sr.color;
-        c.a -= fadeSpeed * Time.deltaTime;
-        sr.color = c;
+        foreach (var sr in renderers)
+        {
+            if (sr == null) continue;
+            Color c = sr.color;
+            c.a -= fadeSpeed * Time.deltaTime;
+            sr.color = c;
+        }
 
-        if (c.a <= 0f)
+        // destroy when fully invisible
+        if (renderers.Length > 0 && renderers[0].color.a <= 0f)
             Destroy(gameObject);
     }
 }
