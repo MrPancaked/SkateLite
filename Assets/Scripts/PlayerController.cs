@@ -10,7 +10,10 @@ public class PlayerController : MonoBehaviour
     private InputManager inputManager;
     private ScoreManager scoreManager;
     private VFXsManager vfxsManager;
-    
+    [SerializeField] private SpriteTrail spriteTrail;
+    [SerializeField] private GameObject liniarTrails;
+
+
     [Header("Player Settings")]
     [SerializeField] private float playerSpeed;
     [SerializeField] private float jumpHight;
@@ -64,11 +67,13 @@ public class PlayerController : MonoBehaviour
     private void DoTrick()
     {
         tricking = true;
+        IsInAirTrails(true);
         scoreManager.AddTrickToCombo();
     }
     private void DoGrind()
     {
         tricking = true;
+        IsInAirTrails(true);
         scoreManager.AddGrindToCombo();
     }
 
@@ -80,8 +85,9 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpHight, ForceMode.Impulse);
             DoTrick();
-            vfxsManager.liniarTrails.SetActive(false);
-            vfxsManager.EchoEffect(true);
+            
+            
+            
             
         }
     }
@@ -133,8 +139,25 @@ public class PlayerController : MonoBehaviour
     {
         vfxsManager.Shake();
         vfxsManager.DustPuff(true);
-        vfxsManager.EchoEffect(false);
-        vfxsManager.liniarTrails.SetActive(true);
+        spriteTrail.StartTrail();
+        liniarTrails.SetActive(false);
+    }
+
+    private void IsInAirTrails(bool inAir)
+    {
+        //inAir = 1 -> does the tricks -> liniar trails
+        //inAir = 0 -> on the floor -> echo trails
+
+        if (inAir)
+        {
+            spriteTrail.StopTrail();
+            liniarTrails.SetActive(true);
+        }
+        else
+        {
+            liniarTrails.SetActive(false) ;
+            spriteTrail.StartTrail();
+        }
     }
 
     private void OnDrawGizmos()

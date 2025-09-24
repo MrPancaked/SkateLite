@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public class SpriteTrail : MonoBehaviour
 {
-    [SerializeField] private GameObject streakPrefab; 
+    [SerializeField] private GameObject streakPrefab;
     [SerializeField] private float spawnInterval = 0.05f;
     [SerializeField] private Color streakColor = Color.cyan;
 
     private List<SpriteRenderer> playerSprites = new List<SpriteRenderer>();
-    public bool active;
+    private bool active;
 
     void Awake()
     {
@@ -18,7 +18,7 @@ public class SpriteTrail : MonoBehaviour
 
     public void StartTrail()
     {
-        if (active)
+        if (!active)
             StartCoroutine(SpawnTrail());
     }
 
@@ -43,7 +43,7 @@ public class SpriteTrail : MonoBehaviour
                 streakRenderers[i].transform.position = playerSprites[i].transform.position;
                 streakRenderers[i].transform.rotation = playerSprites[i].transform.rotation;
                 streakRenderers[i].sortingLayerID = playerSprites[i].sortingLayerID;
-                streakRenderers[i].sortingOrder = playerSprites[i].sortingOrder - 1; 
+                streakRenderers[i].sortingOrder = playerSprites[i].sortingOrder - 1;
             }
 
             yield return new WaitForSeconds(spawnInterval);
