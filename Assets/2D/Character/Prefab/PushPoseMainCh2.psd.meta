@@ -7051,26 +7051,6 @@ ScriptedImporter:
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: LeftShoe
-    spriteName: 
-    isGroup: 1
-    parentIndex: 0
-    spriteID: 6a4712c7f620aaf4eb2e732bc9be99ee
-    layerID: 134
-    mosaicPosition: {x: 0, y: 0}
-    flatten: 0
-    isImported: 0
-    isVisible: 1
-  - name: LeftShoe
-    spriteName: LeftShoe
-    isGroup: 0
-    parentIndex: 11
-    spriteID: 51d25be1d265ddc43a334d00d2b35be8
-    layerID: 18
-    mosaicPosition: {x: 780, y: 1262}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
   - name: Torso
     spriteName: 
     isGroup: 1
@@ -7084,7 +7064,7 @@ ScriptedImporter:
   - name: Torso
     spriteName: Torso
     isGroup: 0
-    parentIndex: 13
+    parentIndex: 11
     spriteID: 844453359286d434fb9481ff555e25a8
     layerID: 30
     mosaicPosition: {x: 780, y: 4}
@@ -7104,10 +7084,30 @@ ScriptedImporter:
   - name: LeftHand
     spriteName: LeftHand
     isGroup: 0
-    parentIndex: 15
+    parentIndex: 13
     spriteID: 34b1ab46648f69548a839af375c41d17
     layerID: 154
     mosaicPosition: {x: 4, y: 2469}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Skateboard
+    spriteName: 
+    isGroup: 1
+    parentIndex: 0
+    spriteID: 83e39dabce24d3a4b9a0af0ebe0cbcf1
+    layerID: 141
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Skateboard
+    spriteName: Skateboard
+    isGroup: 0
+    parentIndex: 15
+    spriteID: 33eff155d7933f54eb24da03acee11a8
+    layerID: 49
+    mosaicPosition: {x: 780, y: 463}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -7131,23 +7131,23 @@ ScriptedImporter:
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: Skateboard
+  - name: LeftShoe
     spriteName: 
     isGroup: 1
     parentIndex: 0
-    spriteID: 83e39dabce24d3a4b9a0af0ebe0cbcf1
-    layerID: 141
+    spriteID: 6a4712c7f620aaf4eb2e732bc9be99ee
+    layerID: 134
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
     isImported: 0
     isVisible: 1
-  - name: Skateboard
-    spriteName: Skateboard
+  - name: LeftShoe
+    spriteName: LeftShoe
     isGroup: 0
     parentIndex: 19
-    spriteID: 33eff155d7933f54eb24da03acee11a8
-    layerID: 49
-    mosaicPosition: {x: 780, y: 463}
+    spriteID: 51d25be1d265ddc43a334d00d2b35be8
+    layerID: 18
+    mosaicPosition: {x: 780, y: 1262}
     flatten: 0
     isImported: 1
     isVisible: 1

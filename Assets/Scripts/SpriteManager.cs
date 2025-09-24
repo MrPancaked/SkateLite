@@ -98,14 +98,21 @@ public class SpriteManager : MonoBehaviour
             }
         }
     }
+
+    public void UpdateRidingSprite()
+    {
+        SwapSprite(cruisingPose);
+    }
     private void SwapSprite(GameObject spriteToCreate)
     {
         GameObject oldSprite = GameObject.FindGameObjectWithTag("PlayerSprite");
-        Transform oldTransform = oldSprite.transform;
-        GameObject newSprite = Instantiate(spriteToCreate, playerSpriteParent.transform);
-        newSprite.transform.position = oldTransform.position;
-        newSprite.transform.rotation = oldTransform.rotation;
-        newSprite.transform.localScale = oldTransform.localScale;
+        GameObject newSprite = Instantiate(spriteToCreate);
+        newSprite.transform.SetParent(playerSpriteParent.transform, false);
+
+        // Copy local transform so it sits exactly where the old sprite was relative to the same parent.
+        newSprite.transform.localPosition = oldSprite.transform.localPosition;
+        newSprite.transform.localRotation = oldSprite.transform.localRotation;
+        newSprite.transform.localScale = oldSprite.transform.localScale;
         Destroy(oldSprite);
     }
 }
