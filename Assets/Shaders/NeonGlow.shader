@@ -3,6 +3,7 @@ Shader "Custom/NeonRimGlowAnimated"
     Properties
     {
         _BaseColor ("Base Color", Color) = (0.2, 0.2, 0.2, 1)
+        _RimColor ("Base Color", Color) = (0, 1, 1, 1)
         _RimPower ("Rim Power", Range(0.5, 8.0)) = 3.0
         _GlowIntensity ("Glow Intensity", Range(0, 5)) = 1.5
         _ColorSpeed ("Color Cycle Speed", Range(0.1, 5.0)) = 1.0
@@ -10,7 +11,8 @@ Shader "Custom/NeonRimGlowAnimated"
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" "Queue"="Transparent" }
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
+        
         LOD 200
 
         Pass
@@ -37,6 +39,7 @@ Shader "Custom/NeonRimGlowAnimated"
 
             CBUFFER_START(UnityPerMaterial)
                 float4 _BaseColor;
+                float4 _RimColor;
                 float _RimPower;
                 float _GlowIntensity;
                 float _ColorSpeed;
@@ -55,20 +58,21 @@ Shader "Custom/NeonRimGlowAnimated"
             half4 frag (Varyings IN) : SV_Target
             {
                 // Animated rim glow color (HSV cycling)
-                float t = _Time.y * _ColorSpeed;
-                float3 rimColor = 0.5 + 0.5 * float3(
-                    sin(t),
-                    sin(t + 2.094),   // offset by 120°
-                    sin(t + 4.188)    // offset by 240°
-                );
+                //float t = _Time.y * _ColorSpeed;
+                //float4 rimColor = 0.5 + 0.5 * float4(
+                //    sin(t),
+                //    sin(t + 2.094),   // offset by 120ï¿½
+                //    sin(t + 4.188),    // offset by 240ï¿½
+                //    1.0
+                //);
 
                 // Rim lighting factor
                 float rim = 1.0 - saturate(dot(IN.viewDirWS, IN.normalWS));
                 rim = pow(rim, _RimPower);
 
-                float3 finalColor = _BaseColor.rgb + rimColor * rim * _GlowIntensity;
+                float4 finalColor = _BaseColor + _RimColor * rim * _GlowIntensity;
 
-                return half4(finalColor, 1.0);
+                return half4(finalColor);
             }
             ENDHLSL
         }
