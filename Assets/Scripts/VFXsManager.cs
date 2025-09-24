@@ -12,7 +12,9 @@ public class VFXsManager : MonoBehaviour
 
     public GameObject liniarTrails;
 
-    [SerializeField] private float globalShakeForce = 1f;
+    public GameObject dustPuff;
+
+    public ComboPostFX comboPostFX;
 
     private void Awake()
     {
@@ -22,15 +24,24 @@ public class VFXsManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void CameraShake(CinemachineImpulseSource impulseSource)
+    public void ComboPostFX(int level)
     {
-        impulseSource.GenerateImpulseWithForce(globalShakeForce);
+        comboPostFX.SetComboLevel(level);
     }
 
+    private void Start()
+    {
+        EchoEffect(true);
+    }
+
+    public void DustPuff(bool start)
+    {
+        dustPuff.SetActive(start);
+    }
 
     public void EchoEffect(bool start)
     {
-        SpriteTrail.active = start;
+        //SpriteTrail.active = start;
     }
 
     public void LiniarTrails(bool start)

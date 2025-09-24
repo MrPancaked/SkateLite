@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,7 +10,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider grindHitbox; //necessary for the gizmo to work
     private InputManager inputManager;
     private ScoreManager scoreManager;
-    
+    private VFXsManager vfxsManager;
+    [SerializeField] private SpriteTrail spriteTrail;
+    [SerializeField] private GameObject liniarTrails;
+
+
     [Header("Player Settings")]
     [SerializeField] private float playerSpeed;
     [SerializeField] private float jumpHight;
@@ -43,6 +48,7 @@ public class PlayerController : MonoBehaviour
         grindHitbox = gameObject.GetComponent<BoxCollider>();
         inputManager = InputManager.Instance;
         scoreManager = ScoreManager.Instance;
+        vfxsManager = VFXsManager.instance;
     }
 
     private void Update()
@@ -63,11 +69,15 @@ public class PlayerController : MonoBehaviour
     private void DoTrick()
     {
         tricking = true;
+        IsInAirTrails(true);
+        
         scoreManager.AddTrickToCombo();
+
     }
     private void DoGrind()
     {
         tricking = true;
+        IsInAirTrails(true);
         scoreManager.AddGrindToCombo();
     }
 
@@ -79,7 +89,10 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpHight, ForceMode.Impulse);
             DoTrick();
-            //VFXsManager.instance.CameraShake(true);
+            
+            
+            
+            
         }
     }
     private void ProcessGrinds()
@@ -100,6 +113,13 @@ public class PlayerController : MonoBehaviour
         LayerMask platformLayerMask = LayerMask.GetMask("Platforms");
         grounded = Physics.Raycast(transform.position, -transform.up, transform.localScale.y + 0.1f, groundLayerMask);
         platform = Physics.Raycast(transform.position, -transform.up, transform.localScale.y + 0.1f, platformLayerMask);
+
+        if (platform)
+        {
+            HitGroundVFX();
+            IsInAirTrails(false);
+        } else if (grounded) IsInAirTrails(false);
+
         
         Vector3 hitBoxSize = new Vector3(grindHitbox.size.x, hitBoxHeight, grindHitbox.size.z);
         bool railCheck = Physics.CheckBox(transform.position + grindHitbox.center - 0.5f * (grindHitbox.size.y + hitBoxHeight) * transform.up, 0.5f * hitBoxSize, Quaternion.identity, grindLayerMask);
@@ -117,11 +137,39 @@ public class PlayerController : MonoBehaviour
             tricking = false;
             scoreManager.CalculateNewScore();
             scoreManager.StopCombo();
+            
         }
         if ((inputManager.trick == TrickDirection.None || grounded) && grindHitbox.enabled)
         {
             grindHitbox.enabled = false;
             Debug.Log($"grindHitbox: {grindHitbox.enabled}");
+            
+
+        }
+    }
+
+    private void HitGroundVFX()
+    {
+        vfxsManager.Shake();
+        vfxsManager.DustPuff(true);
+    }
+
+    private void IsInAirTrails(bool inAir)
+    {
+        //inAir = 1 -> does the tricks -> liniar trails
+        //inAir = 0 -> on the floor -> echo trails
+
+        if (inAir)
+        {
+            spriteTrail.StopTrail();
+            liniarTrails.SetActive(true);
+            vfxsManager.ComboPostFX(1);
+        }
+        else
+        {
+            liniarTrails.SetActive(false) ;
+            spriteTrail.StartTrail();
+            vfxsManager.ComboPostFX(0);
         }
     }
 

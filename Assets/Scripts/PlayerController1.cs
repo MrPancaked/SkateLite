@@ -113,6 +113,7 @@ public class PlayerController1 : MonoBehaviour
             case TrickDirection.None:
             {
                 Debug.Log("No Grind");
+                VFXsManager.instance.EchoEffect(true);
                 break;
             }
         }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 39819052230806692}
   - component: {fileID: 8022615074744282950}
-  - component: {fileID: 5191595684556440269}
+  - component: {fileID: 8913934896113169719}
   m_Layer: 0
   m_Name: Streak Prefab
   m_TagString: Untagged
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
---- !u!212 &5191595684556440269
+--- !u!212 &8913934896113169719
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8262a09d02cec21478a879a54507aced, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
