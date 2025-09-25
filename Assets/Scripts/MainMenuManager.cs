@@ -19,25 +19,24 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
     
-    //doesnt work or something
-    //private void Update()
-    //{
-    //    time += Time.deltaTime;
-    //    if (time >= 0.4285f)
-    //    {
-    //        StartCoroutine(nameof(AnimateLogo));
-    //        time = 0;
-    //    }
-    //}
-    //
-    //private IEnumerator AnimateLogo()
-    //{
-    //    float time = 0;
-    //    while (time < 1f)
-    //    {
-    //        logo.transform.localScale = scaleCurve.Evaluate(time * 0.4285f) * Vector3.one;
-    //        time += Time.deltaTime;
-    //        yield return new WaitForEndOfFrame();
-    //    }
-    //}
+    private void Update()
+    {
+        time += Time.deltaTime;
+        if (time >= 0.4285f)
+        {
+            StartCoroutine(nameof(AnimateLogo));
+            time = 0;
+        }
+    }
+    
+    private IEnumerator AnimateLogo()
+    {
+        float time = 0;
+        while (time < 1f)
+        {
+            logo.transform.localScale = scaleCurve.Evaluate(time * 0.4285f) * Vector3.one;
+            time += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
 }
