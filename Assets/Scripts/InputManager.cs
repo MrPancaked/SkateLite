@@ -20,8 +20,10 @@ public class InputManager : MonoBehaviour
     private InputAction leftTrickInputAction;
     private InputAction rightTrickInputAction;
     private InputAction tabInputAction;
+    private InputAction escapeInputAction;
 
     public bool tabPressed;
+    public bool escapePressed;
     public bool jump;
     
     
@@ -40,6 +42,7 @@ public class InputManager : MonoBehaviour
         leftTrickInputAction = controls.FindActionMap("PlayerActions").FindAction("LeftTrick");
         rightTrickInputAction = controls.FindActionMap("PlayerActions").FindAction("RightTrick");
         tabInputAction = controls.FindActionMap("UIActions").FindAction("Tab");
+        escapeInputAction = controls.FindActionMap("UIActions").FindAction("Escape");
     }
     
     private void OnEnable()
@@ -50,6 +53,7 @@ public class InputManager : MonoBehaviour
         leftTrickInputAction.Enable();
         rightTrickInputAction.Enable();
         tabInputAction.Enable();
+        escapeInputAction.Enable();
     }
 
     private void OnDisable()
@@ -60,12 +64,16 @@ public class InputManager : MonoBehaviour
         leftTrickInputAction.Disable();
         rightTrickInputAction.Disable();
         tabInputAction.Disable();
+        escapeInputAction.Disable();
     }
 
     private void Update()
     {
-        if (tabInputAction.IsPressed()) tabPressed = true;
+        if (tabInputAction.triggered) tabPressed = true;
         else tabPressed = false;
+        
+        if (escapeInputAction.triggered) escapePressed = true;
+        else escapePressed = false;
     }
 
     #endregion

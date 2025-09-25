@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     //private stuff
     private bool grounded;
     private bool platform;
+    private bool stuck;
     private bool inShop;
     private bool onRail;
     private bool underRail;
@@ -91,8 +92,9 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessJumps()
     {
-        if (!inShop) rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, playerSpeed); //setting horizontal velocity to be constant
+        if (!inShop && !stuck) rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, playerSpeed); //setting horizontal velocity to be constant
         else if (inShop) rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z - 0.01f);
+        else if (stuck) rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, 0f);
         
         if (inputManager.jump && (grounded || platform || onRail)) //jumping / trick
         {
@@ -140,6 +142,8 @@ public class PlayerController : MonoBehaviour
         
         LayerMask shopLayerMask = LayerMask.GetMask("Shop");
         inShop = Physics.Raycast(transform.position, -transform.up, transform.localScale.y + 0.1f, shopLayerMask);
+        
+        stuck = Physics.CheckBox(transform.position + transform.forward * 0.5f + transform.up * 0.125f, 0.5f * new Vector3(0.1f, 2f, 0.5f), Quaternion.identity, platformLayerMask);
     }
 
     private void ResetVariables(bool grounded, bool platform)
@@ -194,5 +198,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireCube(transform.position + grindHitbox.center - 0.5f * (grindHitbox.size.y + hitBoxHeight) * transform.up, hitBoxSize);
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position + grindHitbox.center + 0.5f * (hitBoxHeight + 0.2f) * transform.up, new Vector3(hitBoxSize.x, grindHitbox.size.y + hitBoxHeight, hitBoxSize.z));
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position + transform.forward * 0.5f + transform.up * 0.125f,new Vector3(0.1f, 2f, 0.5f));
     }
 }
