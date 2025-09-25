@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upTrickName: KickFlip
   downTrickName: HeelFlip
-  leftTrickName: FS180
-  rightTrickName: BS180
+  leftTrickName: FS 180
+  rightTrickName: pop Shuvit
   noneTrickName: Ollie
   upGrindName: 50-50 Grind
   downGrindName: FeebleGrind
   leftGrindName: TailGrind
   rightGrindName: NoseGrind
-  upTrickScore: 1000
-  downTrickScore: 2000
-  leftTrickScore: 3000
-  rightTrickScore: 4000
+  upTrickScore: 100
+  downTrickScore: 100
+  leftTrickScore: 100
+  rightTrickScore: 100
   noneTrickScore: 100
-  upGrindScore: 1234
-  downGrindScore: 2345
-  leftGrindScore: 3456
-  rightGrindScore: 4567
+  upGrindScore: 200
+  downGrindScore: 200
+  leftGrindScore: 200
+  rightGrindScore: 200
