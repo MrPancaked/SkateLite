@@ -15,13 +15,6 @@ Hit target points to unlock the next area. Design your runs to maximize multipli
 ### Lobby & Quests
 Unlock NPCs in the lobby to accept quests — complete them for cosmetics and board upgrades.
 
-### Controls (Prototype)
-- Left / Right — Move
-- Up — Jump
-- Down + Jump — Grind / Drop
-- Action — Trick / Spin
-- Hold Action — Charge special trick
-
 ## Team
 Kitties In Suits With Hamster Nunchakus
 - Designers: [Inferno223](https://github.com/FireFlame223), [franelas1](https://github.com/franelas1).
